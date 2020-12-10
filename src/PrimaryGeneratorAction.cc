@@ -27,32 +27,32 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
   paramMan = ParamManager::GetParam();
   BeamParticle = paramMan->GetBeamParticle();
   BeamType     = paramMan->GetBeamType();
-  BeamMom      = paramMan->GetBeamMom();
+  BeamMom      = paramMan->GetBeamMom() * MeV;
   BeamMomR     = paramMan->GetBeamMomRange();
-  BeamX        = paramMan->GetBeamX();
-  BeamXR       = paramMan->GetBeamXRange();
-  BeamY        = paramMan->GetBeamY();
-  BeamYR       = paramMan->GetBeamYRange();
-  BeamZ        = paramMan->GetBeamZ();
-  BeamZR       = paramMan->GetBeamZRange();
-  BeamT        = paramMan->GetBeamTheta();
-  BeamTR       = paramMan->GetBeamThetaRange();
-  BeamP        = paramMan->GetBeamPhi();
-  BeamPR       = paramMan->GetBeamPhiRange();
-  DecayFlag    = paramMan->GetDecayFlag();
+  BeamX        = paramMan->GetBeamX() * mm;
+  BeamXR       = paramMan->GetBeamXRange() * mm;
+  BeamY        = paramMan->GetBeamY() * mm;
+  BeamYR       = paramMan->GetBeamYRange() * mm;
+  BeamZ        = paramMan->GetBeamZ() * mm;
+  BeamZR       = paramMan->GetBeamZRange() * mm;
+  BeamT        = paramMan->GetBeamTheta() * degree;
+  BeamTR       = paramMan->GetBeamThetaRange() * degree;
+  BeamP        = paramMan->GetBeamPhi() * degree;
+  BeamPR       = paramMan->GetBeamPhiRange() * degree;
+  DecayFlag    = paramMan->GetDecayFlag() * degree;
 
-  x  = BeamX   * mm;
-  y  = BeamY   * mm;
-  z  = BeamZ   * mm;
-  px = 0.      * MeV;
-  py = 0.      * MeV;
-  pz = BeamMom * MeV;
+  x  = BeamX;
+  y  = BeamY;
+  z  = BeamZ;
+  px = 0.;
+  py = 0.;
+  pz = BeamMom;
 
 //  h_Eg_gene_             = (TH1D*)gROOT->FindObject("h_Eg_gene");
 
   particle = particleTable->FindParticle(BeamParticle);
 
-  if(DecayFlag==0) particle->SetPDGStable(1);
+//  if(DecayFlag==0) particle->SetPDGStable(1);
 
   ParticleGun = new G4ParticleGun(1);
   ParticleGun->SetParticleDefinition(particle);
@@ -94,12 +94,12 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 void PrimaryGeneratorAction::GenerateUniform()
 {
   //x = 0.*mm;  y = 0.*mm;  z = -1500.*mm;
-  x = (0+BeamX)*mm;
-  y = (0+BeamY)*mm;
-  z = (0+BeamZ)*mm;
-  x += CLHEP::RandGauss::shoot(x,BeamXR*mm);
-  y += CLHEP::RandGauss::shoot(y,BeamYR*mm);
-  z += CLHEP::RandFlat::shoot(-BeamZR*mm,BeamZR*mm);
+  x = (0+BeamX);
+  y = (0+BeamY);
+  z = (0+BeamZ);
+  x += CLHEP::RandGauss::shoot(x,BeamXR);
+  y += CLHEP::RandGauss::shoot(y,BeamYR);
+  z += CLHEP::RandFlat::shoot(-BeamZR,BeamZR);
   G4ThreeVector pos(x, y, z);
 
   x = pos.x();  y = pos.y();  z = pos.z();

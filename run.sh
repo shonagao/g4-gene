@@ -1,3 +1,5 @@
 #!/bin/sh
 
-./build/main macro/gun.mac 0000 param/input.in
+i=`expr $1 + 10000`
+./build/main macro/gun.mac $i param/input.in
+

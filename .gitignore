@@ -32,4 +32,6 @@
 *.app
 
 build/*
-root/*
+root/*.root
+Log/*
+G4History.macro

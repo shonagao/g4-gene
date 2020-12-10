@@ -24,8 +24,9 @@ void SteppingAction::UserSteppingAction( const G4Step *aStep )
   const G4VTouchable *theTouchable = aStep->GetPreStepPoint()->GetTouchable();
   G4VPhysicalVolume *Vol = theTouchable->GetVolume();
   G4String volName = Vol->GetName();
-  G4double length = track->GetTrackLength();
+  G4double length  = track->GetTrackLength();
   G4String parName = track->GetDynamicParticle()->GetDefinition()->GetParticleName();
+  G4double vkin    = track->GetVertexKineticEnergy();
 
 //  G4cout<<"step name "<<parName<<" "<<volName<<" "<<energy<<G4endl;
 
@@ -36,6 +37,7 @@ void SteppingAction::UserSteppingAction( const G4Step *aStep )
    || parName == "nu_mu"
    || parName == "anti_nu_e"
    || parName == "nu_e"
+   || vkin < 100. * keV
      ){
     track->SetTrackStatus(fKillTrackAndSecondaries);
   }

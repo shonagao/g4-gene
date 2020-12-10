@@ -51,7 +51,7 @@ public:
   G4double GetBeamPhi()           { return bp;      }
   G4double GetBeamPhiRange()      { return bpr;     }
 
-  G4int GetTargetThick()          { return tthick;  }
+  G4double GetTargetThick()       { return tthick;  }
 
   G4int GetDecayFlag()            { return decay;   }
 

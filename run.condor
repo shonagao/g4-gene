@@ -1,0 +1,15 @@
+Universe     = vanilla
+Initialdir   = /data/40a/ELS/nagao/github/g4-gene
+Executable   = /data/40a/ELS/nagao/github/g4-gene/run.sh
+Arguments    = $(process) 
+##Requirements = (machine == "farm40.npex.prv" || machine == "farm41.npex.prv" || machine == "farm42.npex.prv" || machine == "farm43.npex.prv" || machine == "farm44.npex.prv")
+Requirements = (Arch=="X86_64" && OpSys == "LINUX" \
+        && (machine == "farm40" || machine == "farm41" || machine == "farm42" \
+         || machine == "farm43" || machine == "farm44"))
+output       = Log/run-$(cluster)-$(process).out
+Log          = Log/run-$(cluster)-$(process).log
+Priority     = 0
+getenv       = True
+notification = Error
+notify_user  = nagao@lambda.phys.tohoku.ac.jp
+Queue 500

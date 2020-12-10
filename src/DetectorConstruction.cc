@@ -91,8 +91,9 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
   target = new Target();
   G4ThreeVector tar_pos(0.*mm, 0.*mm, 0.*mm);
   G4RotationMatrix *tar_rot = new G4RotationMatrix();
-  G4double thick = 10. * mm;
-  target->target("TargetPV",tar_pos,tar_rot,thick,worldLV,mList->C,0);
+  G4double thick = paramMan->GetTargetThick() * mm;
+//  target->target("TargetPV",tar_pos,tar_rot,thick,worldLV,mList->Graphite,0);
+  target->target("TargetPV",tar_pos,tar_rot,thick/2.,worldLV,mList->LiqH,0);
 
   //////////////////////
   // Virtual Detector //

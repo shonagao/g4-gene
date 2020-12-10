@@ -23,7 +23,9 @@ public:
   G4Material *Fe;
   G4Material *Pb;
   G4Material *Scinti;
+  G4Material *LiqH;
 
+  G4Element *elH;
   G4Element *elC;
 
   G4Material *HeGas;
@@ -32,6 +34,7 @@ public:
   G4Material *O2Gas;
 
 //  G4Material *Scinti;
+  G4Material *MyLiqH;
   G4Material *Graphite;
 
 private:

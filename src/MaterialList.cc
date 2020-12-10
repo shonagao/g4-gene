@@ -25,6 +25,7 @@ MaterialList::MaterialList()
   nist->FindOrBuildMaterial("G4_Fe");
   nist->FindOrBuildMaterial("G4_Pb");
   nist->FindOrBuildMaterial("G4_PLASTIC_SC_VINYLTOLUENE");
+  nist->FindOrBuildMaterial("G4_lH2");
 
   Vacuum = G4Material::GetMaterial("G4_Galactic");
   Air    = G4Material::GetMaterial("G4_AIR");
@@ -37,14 +38,15 @@ MaterialList::MaterialList()
   Fe     = G4Material::GetMaterial("G4_Fe");
   Pb     = G4Material::GetMaterial("G4_Pb");
   Scinti = G4Material::GetMaterial("G4_PLASTIC_SC_VINYLTOLUENE");
+  LiqH   = G4Material::GetMaterial("G4_lH2");
 
   //=== Elements ===//
-//  name = "Hydrogen"; symbol = "H";
-//  a = 1.00794*CLHEP::gram/mole;
-//  elH = new G4Element( name, symbol, iz=1., a);
+  name = "Hydrogen"; symbol = "H";
+  a = 1.00794*CLHEP::gram/mole;
+  elH = new G4Element( name, symbol, iz=1., a);
 
   name = "Carbon"; symbol = "C";
-  a = 14.00674*CLHEP::gram/mole;
+  a = 12.011*CLHEP::gram/mole;
   elC = new G4Element( name, symbol, iz=6., a);
 
   //=== Simple Materials ==//
@@ -64,10 +66,14 @@ MaterialList::MaterialList()
   O2Gas = new G4Material( name, z=16., a, density );
 
   //=== Componds Materials ===//
+  name = "MyLiqHydrogen";
+  density = 1.0*g/cm3;
+  MyLiqH = new G4Material( name, density, nel=1);
+  MyLiqH->AddElement(elH, nAtoms=1);
+
   name = "Graphite";
   density = 1.8*g/cm3;
   Graphite = new G4Material( name, density, nel=1);
-//  Graphite->AddElement(nist->FindOrBuildElement("G4_Au"), nAtoms=1);
   Graphite->AddElement(elC, nAtoms=1);
 
 //  name = "Scintillator";
@@ -127,8 +133,8 @@ MaterialList::MaterialList()
 
 }
 
- MaterialList::~MaterialList()
-{
+// MaterialList::~MaterialList()
+//{
 //   delete Heavymet;
 //   delete DCGas;
 //   delete Vacuum;
@@ -148,7 +154,7 @@ MaterialList::MaterialList()
 //   delete N2Gas;
 //   delete O2Gas;
 //   delete SiO2;
-   delete Graphite;
+//   delete Graphite;
 //
 //   delete elH;
 //   delete elC;
@@ -162,5 +168,5 @@ MaterialList::MaterialList()
 //   delete elAu;
 //   delete elS;
 //   delete elBa;
-}
+//}
 
