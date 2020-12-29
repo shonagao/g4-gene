@@ -4,6 +4,7 @@
 #include "Analysis.hh"
 #include "RunAction.hh"
 #include "EventAction.hh"
+#include "PhysicsList.hh"
 
 //#ifdef G4MULTITHREADED
 //#include "G4MTRunManager.hh"
@@ -68,8 +69,9 @@ int main(int argc,char** argv)
   runManager->SetUserInitialization(new DetectorConstruction());
 
   std::cout<<"Physics List"<<std::endl;
-  G4VModularPhysicsList* physicsList = new FTFP_BERT;
-  physicsList->RegisterPhysics(new G4StepLimiterPhysics());
+  PhysicsList *physicsList = new PhysicsList();
+//  G4VModularPhysicsList* physicsList = new FTFP_BERT;
+//  physicsList->RegisterPhysics(new G4StepLimiterPhysics());
   runManager->SetUserInitialization(physicsList);
     
   //analyzer
