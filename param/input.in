@@ -1,6 +1,6 @@
 OutputFile: output
 ####### Beam property ######
-BeamPar: gamma        # e-,gamma
+BeamPar: lambda        # e-,gamma, chargedgeantino, deuteron, proton, pi+, lambda
 BeamType: 0           # 0:Fix beam 1:Uni 
 BeamMom: 1500.0 0.0   # momentum (MeV) range (+-%)
 BeamX:     0.0 0.0    # generate X position (mm) sigma (mm)
