@@ -69,9 +69,9 @@ int main(int argc,char** argv)
   runManager->SetUserInitialization(new DetectorConstruction());
 
   std::cout<<"Physics List"<<std::endl;
-  PhysicsList *physicsList = new PhysicsList();
-//  G4VModularPhysicsList* physicsList = new FTFP_BERT;
-//  physicsList->RegisterPhysics(new G4StepLimiterPhysics());
+//  PhysicsList *physicsList = new PhysicsList();
+  G4VModularPhysicsList* physicsList = new FTFP_BERT;
+  physicsList->RegisterPhysics(new G4StepLimiterPhysics());
   runManager->SetUserInitialization(physicsList);
     
   //analyzer

@@ -1,16 +1,16 @@
 OutputFile: output
 ####### Beam property ######
-BeamPar: lambda        # e-,gamma, chargedgeantino, deuteron, proton, pi+, lambda
+BeamPar: e-        # e-,gamma, chargedgeantino, deuteron, proton, pi+, lambda
 BeamType: 0           # 0:Fix beam 1:Uni 
-BeamMom: 1500.0 0.0   # momentum (MeV) range (+-%)
+BeamMom: 4318.0 0.0   # momentum (MeV) range (+-%)
 BeamX:     0.0 0.0    # generate X position (mm) sigma (mm)
 BeamY:     0.0 0.0    # generate Y position (mm) sigma (mm)
-BeamZ:     -20.0 0.0    # generate Z position (mm) range (mm)
+BeamZ:    -250.0 0.0    # generate Z position (mm) range (mm)
 BeamTheta: 0.0 0.0    # generate Theta (deg) range (deg)
 BeamPhi:   0.0 0.0    # generate Phi (deg) range (deg)
 ### Target 100mg/cm2
 ### Graphite 1.8g/cm3: 0.556mm
 ### Liquid H2 0.0708g/cm3: 1.412mm
-TargetThick: 10.0   # target thickness (mm)
+TargetThick: 20.0   # target thickness (mm)
 Decay: 1              # 0:OFF 1:ON
 

@@ -73,7 +73,7 @@ G4bool VDSD::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
 //  if((gpos.theta()>1.*degree && gmom.mag()>50.*MeV) || fabs(pid)>100){
   if((gpos.theta()>5.*degree && gmom.mag()>500.*MeV) || (fabs(pid)>100 && gmom.mag()>250.*MeV)){
-    VDHit *ahit = new VDHit(gpos,gmom,time,pname,pid,trackID,cre_process);
+    VDHit *ahit = new VDHit(gpos,gmom,vpos,vp,time,pname,pid,trackID,cre_process);
     hitsCollection[volID]->insert(ahit);
   }
   return true;

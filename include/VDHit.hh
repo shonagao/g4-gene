@@ -11,6 +11,8 @@ class VDHit : public G4VHit
 public:
   VDHit(const G4ThreeVector &gPos,
         const G4ThreeVector &gMom,
+        const G4ThreeVector &vPos,
+        const G4ThreeVector &vMom,
         G4double Time,
         G4String Pname,
         G4int    Pid,
@@ -29,6 +31,8 @@ public:
 private:
   G4ThreeVector gpos;
   G4ThreeVector gmom;
+  G4ThreeVector vpos;
+  G4ThreeVector vmom;
   G4double time;
   G4String pname;
   G4int    pid;
@@ -38,6 +42,8 @@ private:
 public:
   void SetGPos(const G4ThreeVector agpos) { gpos    = agpos;    }
   void SetGMom(const G4ThreeVector agmom) { gmom    = agmom;    }
+  void SetVPos(const G4ThreeVector avpos) { vpos    = avpos;    }
+  void SetVMom(const G4ThreeVector avmom) { vmom    = avmom;    }
   void SetTime(G4double atime)            { time    = atime;    }
   void SetPname(G4String apname)          { pname   = apname;   }
   void SetPID(G4int apid)                 { pid     = apid;     }
@@ -46,6 +52,8 @@ public:
 
   const G4ThreeVector GetGPos() const { return gpos;    }
   const G4ThreeVector GetGMom() const { return gmom;    }
+  const G4ThreeVector GetVPos() const { return vpos;    }
+  const G4ThreeVector GetVMom() const { return vmom;    }
   G4double GetTime()            const { return time;    }
   G4String GetPname()           const { return pname;   }
   G4int    GetPID()             const { return pid;     }

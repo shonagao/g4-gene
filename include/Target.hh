@@ -14,6 +14,7 @@ class G4Material;
 
 class G4Box;
 class G4Tubs;
+class G4Sphere;
 class G4LogicalVolume;
 class G4VPhysicalVolume;
 class MaterialList;
@@ -32,7 +33,12 @@ public:
                             G4Material          *Material,
                             int                 ID);
   
-  G4LogicalVolume *GetTargetLV() { return TargetLV; }
+  G4VPhysicalVolume* JLabTargetCell_2018(const G4String      &Name,
+                                         const G4ThreeVector &Pos,
+                                         G4RotationMatrix    *Rot,
+                                         G4LogicalVolume     *Mother,
+                                         int                 ID);
+   G4LogicalVolume *GetTargetLV() { return TargetLV; }
   
 private:
   G4Tubs*             TargetS;

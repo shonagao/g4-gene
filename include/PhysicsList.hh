@@ -16,19 +16,20 @@ public:
   PhysicsList();
   virtual ~PhysicsList();
 
-  virtual void ConstructParticle();
-  virtual void ConstructProcess();    
-  void AddPhysicsList(const G4String& name);
-
-  void AddDecay();
-  void AddRadioactiveDecay();
-  void AddStepMax();
+//  virtual void ConstructParticle();
+//  virtual void ConstructProcess();    
+//  void AddPhysicsList(const G4String& name);
+//
+//  void AddDecay();
+//  void AddRadioactiveDecay();
+//  void AddStepMax();
   
 private:
-  G4VPhysicsConstructor*  fEmPhysicsList;
-  std::vector<G4VPhysicsConstructor*>  fHadronPhys;
+//  G4VPhysicsConstructor*  fEmPhysicsList;
+//  G4VPhysicsConstructor*  fParticleList;
+//  std::vector<G4VPhysicsConstructor*>  fHadronPhys;
     
-  G4PhysListFactoryMessenger* fFactMessenger;
+//  G4PhysListFactoryMessenger* fFactMessenger;
 
 };
 

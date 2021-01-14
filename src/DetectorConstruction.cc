@@ -60,7 +60,7 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
   ///////////
   // World //
   ///////////
-  G4double worldLength = 1.*m;
+  G4double worldLength = 2.*m;
   G4GeometryManager::GetInstance()->SetWorldMaximumExtent(worldLength);
 
   G4Box* worldS = new G4Box( "world", worldLength/2., worldLength/2., worldLength/2. );
@@ -92,8 +92,8 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
   G4ThreeVector tar_pos(0.*mm, 0.*mm, 0.*mm);
   G4RotationMatrix *tar_rot = new G4RotationMatrix();
   G4double thick = paramMan->GetTargetThick() * mm;
-//  target->target("TargetPV",tar_pos,tar_rot,thick,worldLV,mList->Graphite,0);
-  target->target("TargetPV",tar_pos,tar_rot,thick/2.,worldLV,mList->LiqH,0);
+  target->target("TargetPV",tar_pos,tar_rot,thick,worldLV,mList->MyLiqH,0);
+//  target->JLabTargetCell_2018("TargetPV",tar_pos,tar_rot,worldLV,0);
 
   //////////////////////
   // Virtual Detector //
@@ -102,7 +102,7 @@ G4VPhysicalVolume* DetectorConstruction::DefineVolumes()
   for( int i=0; i<nvd; i++ ){
     vd[i] = new VD();
     G4ThreeVector vd_pos(0.*mm, 0.*mm, 0.*mm);
-    vd[i]->SetVD("VD",vd_pos,vd_rot,100.*mm, 0.1*mm, worldLV,i);
+    vd[i]->SetVD("VD",vd_pos,vd_rot,300.*mm, 0.1*mm, worldLV,i);
   }
 
 //  G4double maxStep = 0.5*chamberWidth;

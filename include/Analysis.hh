@@ -47,6 +47,9 @@ class Analysis
     G4double VDtheta[10], VDphi[10];
     G4double VDpx[10], VDpy[10], VDpz[10];
     G4double VDp[10], VDptheta[10], VDpphi[10];
+    G4double VDvx[10] , VDvy[10] , VDvz[10];
+    G4double VDvpx[10], VDvpy[10], VDvpz[10];
+    G4double VDvp[10], VDvptheta[10], VDvpphi[10];
     G4int VDpid[10], VDtrackid[10];
     char VDpname[10][200];
     char VDpro[10][200];

@@ -92,8 +92,9 @@ void Analysis::EndOfEvent(const G4Event *aEvent ){
 
     for(int n=0;n<10;n++){
       VDtime[n] = -9999;
-      VDx[n]  = VDy[n]  = VDz[n]  = VDtheta[n] = VDphi[n]    = -9999;
-      VDpx[n] = VDpy[n] = VDpz[n] = VDp[n]     = VDptheta[n] = VDpphi[n] =  -9999;
+      VDx[n]  = VDy[n]  = VDz[n]  = VDtheta[n] = VDphi[n]     = -9999;
+      VDpx[n] = VDpy[n] = VDpz[n] = VDp[n]     = VDptheta[n]  = VDpphi[n]  = -9999;
+      VDvx[n] = VDvy[n] = VDvz[n] = VDvp[n]    = VDvptheta[n] = VDvpphi[n] = -9999;
       VDpid[n] = VDtrackid[n] = -99;
       memset( VDpro[n], 0, sizeof( VDpro[n] ) );
       memset( VDpname[n], 0, sizeof( VDpname[n] ) );
@@ -104,10 +105,14 @@ void Analysis::EndOfEvent(const G4Event *aEvent ){
       VDtime[n] = fVDhit->GetTime();
       G4ThreeVector VDgpos = fVDhit->GetGPos();
       G4ThreeVector VDgmom = fVDhit->GetGMom();
+      G4ThreeVector VDvpos = fVDhit->GetVPos();
+      G4ThreeVector VDvmom = fVDhit->GetVMom();
       VDx[n] = VDgpos.x(); VDy[n] = VDgpos.y(); VDz[n] = VDgpos.z();
       VDtheta[n] = VDgpos.theta(); VDphi[n] = VDgpos.phi();
       VDpx[n] = VDgmom.x(); VDpy[n] = VDgmom.y(); VDpz[n] = VDgmom.z();
       VDp[n] = VDgmom.mag(); VDptheta[n] = VDgmom.theta(); VDpphi[n] = VDgmom.phi();
+      VDvx[n] = VDvpos.x(); VDvy[n] = VDvpos.y(); VDvz[n] = VDvpos.z();
+      VDvp[n] = VDvmom.mag(); VDvptheta[n] = VDvmom.theta(); VDvpphi[n] = VDvmom.phi();
       VDpid[n]      = fVDhit->GetPID();
       VDtrackid[n]  = fVDhit->GetTrackID();
       std::string process  = fVDhit->GetProcess();
@@ -150,40 +155,51 @@ void Analysis::DefineRoot(){
   fTree->Branch("z_i"     , &Genpos_z  , "z_i/D"         );
   
   //Virtual Detector
-  fTree->Branch("vdnhit"    ,&VDnhit     ,      "vdnhit/I"                );
-  fTree->Branch("vdx"       , VDx        ,      "vdx[10]/D"               );
-  fTree->Branch("vdy"       , VDy        ,      "vdy[10]/D"               );
-  fTree->Branch("vdz"       , VDz        ,      "vdz[10]/D"               );
-  fTree->Branch("vdtheta"   , VDtheta    ,      "vdtheta[10]/D"           );
-  fTree->Branch("vdphi"     , VDphi      ,      "vdphi[10]/D"             );
-  fTree->Branch("vdp"       , VDp        ,      "vdp[10]/D"               );
-  fTree->Branch("vdpx"      , VDpx       ,      "vdpx[10]/D"              );
-  fTree->Branch("vdpy"      , VDpy       ,      "vdpy[10]/D"              );
-  fTree->Branch("vdpz"      , VDpz       ,      "vdpz[10]/D"              );
-  fTree->Branch("vdptheta"  , VDptheta   ,      "vdptheta[10]/D"          );
-  fTree->Branch("vdpphi"    , VDpphi     ,      "vdpphi[10]/D"            );
-  fTree->Branch("vdpid"     , VDpid      ,      "vdpid[10]/I"             );
-  fTree->Branch("vdtrackid" , VDtrackid  ,      "vdtrackid[10]/I"         );
-  fTree->Branch("vdtime"    , VDtime     ,      "vdtime[10]/D"            );
-  fTree->Branch("vdpro0"    , VDpro[0]   ,      "vdpro0[10]/C"            );
-  fTree->Branch("vdpro1"    , VDpro[1]   ,      "vdpro1[10]/C"            );
-  fTree->Branch("vdpro2"    , VDpro[2]   ,      "vdpro2[10]/C"            );
-  fTree->Branch("vdpro3"    , VDpro[3]   ,      "vdpro3[10]/C"            );
-  fTree->Branch("vdpro4"    , VDpro[4]   ,      "vdpro4[10]/C"            );
-  fTree->Branch("vdpro5"    , VDpro[5]   ,      "vdpro5[10]/C"            );
-  fTree->Branch("vdpro6"    , VDpro[6]   ,      "vdpro6[10]/C"            );
-  fTree->Branch("vdpro7"    , VDpro[7]   ,      "vdpro7[10]/C"            );
-  fTree->Branch("vdpro8"    , VDpro[8]   ,      "vdpro8[10]/C"            );
-  fTree->Branch("vdpro9"    , VDpro[9]   ,      "vdpro9[10]/C"            );
-  fTree->Branch("vdpname0"  , VDpname[0] ,      "vdpname0[10]/C"          );
-  fTree->Branch("vdpname1"  , VDpname[1] ,      "vdpname1[10]/C"          );
-  fTree->Branch("vdpname2"  , VDpname[2] ,      "vdpname2[10]/C"          );
-  fTree->Branch("vdpname3"  , VDpname[3] ,      "vdpname3[10]/C"          );
-  fTree->Branch("vdpname4"  , VDpname[4] ,      "vdpname4[10]/C"          );
-  fTree->Branch("vdpname5"  , VDpname[5] ,      "vdpname5[10]/C"          );
-  fTree->Branch("vdpname6"  , VDpname[6] ,      "vdpname6[10]/C"          );
-  fTree->Branch("vdpname7"  , VDpname[7] ,      "vdpname7[10]/C"          );
-  fTree->Branch("vdpname8"  , VDpname[8] ,      "vdpname8[10]/C"          );
-  fTree->Branch("vdpname9"  , VDpname[9] ,      "vdpname9[10]/C"          );
+  fTree->Branch("vdnhit"    ,&VDnhit     ,  "vdnhit/I"          );
+// position at detector
+  fTree->Branch("vdx"       , VDx        ,  "vdx[10]/D"         );
+  fTree->Branch("vdy"       , VDy        ,  "vdy[10]/D"         );
+  fTree->Branch("vdz"       , VDz        ,  "vdz[10]/D"         );
+  fTree->Branch("vdtheta"   , VDtheta    ,  "vdtheta[10]/D"     );
+  fTree->Branch("vdphi"     , VDphi      ,  "vdphi[10]/D"       );
+// momentum at detector
+  fTree->Branch("vdp"       , VDp        ,  "vdp[10]/D"         );
+  fTree->Branch("vdpx"      , VDpx       ,  "vdpx[10]/D"        );
+  fTree->Branch("vdpy"      , VDpy       ,  "vdpy[10]/D"        );
+  fTree->Branch("vdpz"      , VDpz       ,  "vdpz[10]/D"        );
+  fTree->Branch("vdptheta"  , VDptheta   ,  "vdptheta[10]/D"    );
+  fTree->Branch("vdpphi"    , VDpphi     ,  "vdpphi[10]/D"      );
+// position at vertex
+  fTree->Branch("vdvx"      , VDvx       ,  "vdvx[10]/D"        );
+  fTree->Branch("vdvy"      , VDvy       ,  "vdvy[10]/D"        );
+  fTree->Branch("vdvz"      , VDvz       ,  "vdvz[10]/D"        );
+  fTree->Branch("vdvp"      , VDvp       ,  "vdvp[10]/D"        );
+  fTree->Branch("vdvptheta" , VDvptheta  ,  "vdvptheta[10]/D"   );
+  fTree->Branch("vdvpphi"   , VDvpphi    ,  "vdvpphi[10]/D"     );
+// pid, track, time at detector
+  fTree->Branch("vdpid"     , VDpid      ,  "vdpid[10]/I"       );
+  fTree->Branch("vdtrackid" , VDtrackid  ,  "vdtrackid[10]/I"   );
+  fTree->Branch("vdtime"    , VDtime     ,  "vdtime[10]/D"      );
+// generate process particle name at detector
+  fTree->Branch("vdpro0"    ,&VDpro[0]   ,  "vdpro0/C"          );
+  fTree->Branch("vdpro1"    ,&VDpro[1]   ,  "vdpro1/C"          );
+  fTree->Branch("vdpro2"    ,&VDpro[2]   ,  "vdpro2/C"          );
+  fTree->Branch("vdpro3"    ,&VDpro[3]   ,  "vdpro3/C"          );
+  fTree->Branch("vdpro4"    ,&VDpro[4]   ,  "vdpro4/C"          );
+  fTree->Branch("vdpro5"    ,&VDpro[5]   ,  "vdpro5/C"          );
+  fTree->Branch("vdpro6"    ,&VDpro[6]   ,  "vdpro6/C"          );
+  fTree->Branch("vdpro7"    ,&VDpro[7]   ,  "vdpro7/C"          );
+  fTree->Branch("vdpro8"    ,&VDpro[8]   ,  "vdpro8/C"          );
+  fTree->Branch("vdpro9"    ,&VDpro[9]   ,  "vdpro9/C"          );
+  fTree->Branch("vdpname0"  ,&VDpname[0] ,  "vdpname0/C"        );
+  fTree->Branch("vdpname1"  ,&VDpname[1] ,  "vdpname1/C"        );
+  fTree->Branch("vdpname2"  ,&VDpname[2] ,  "vdpname2/C"        );
+  fTree->Branch("vdpname3"  ,&VDpname[3] ,  "vdpname3/C"        );
+  fTree->Branch("vdpname4"  ,&VDpname[4] ,  "vdpname4/C"        );
+  fTree->Branch("vdpname5"  ,&VDpname[5] ,  "vdpname5/C"        );
+  fTree->Branch("vdpname6"  ,&VDpname[6] ,  "vdpname6/C"        );
+  fTree->Branch("vdpname7"  ,&VDpname[7] ,  "vdpname7/C"        );
+  fTree->Branch("vdpname8"  ,&VDpname[8] ,  "vdpname8/C"        );
+  fTree->Branch("vdpname9"  ,&VDpname[9] ,  "vdpname9/C"        );
 }
 
